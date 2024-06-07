@@ -1,0 +1,44 @@
+
+CREATE TABLE BST (
+    N INT,
+    P INT
+);
+
+
+INSERT INTO BST (N, P) VALUES (1, 2);
+INSERT INTO BST (N, P) VALUES (3, 2);
+INSERT INTO BST (N, P) VALUES (6, 8);
+INSERT INTO BST (N, P) VALUES (2, 8);
+INSERT INTO BST (N, P) VALUES (8, 5);
+INSERT INTO BST (N, P) VALUES (5, NULL);
+INSERT INTO BST (N, P) VALUES (9, 5);
+
+
+
+
+
+WITH RootNode AS (
+    SELECT N
+    FROM BST
+    WHERE P IS NULL
+),
+LeafNodes AS (
+    SELECT N
+    FROM BST
+    WHERE N NOT IN (SELECT P FROM BST WHERE P IS NOT NULL)
+),
+InnerNodes AS (
+    SELECT N
+    FROM BST
+    WHERE N NOT IN (SELECT N FROM RootNode)
+    AND N NOT IN (SELECT N FROM LeafNodes)
+)
+SELECT
+    N,
+    CASE
+        WHEN N IN (SELECT N FROM RootNode) THEN 'Root'
+        WHEN N IN (SELECT N FROM LeafNodes) THEN 'Leaf'
+        ELSE 'Inner'
+    END AS NodeType
+FROM BST
+ORDER BY N;
