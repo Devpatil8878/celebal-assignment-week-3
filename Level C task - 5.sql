@@ -1,10 +1,10 @@
--- Create Hackers table
+
 CREATE TABLE Hackers (
     hacker_id INT PRIMARY KEY,
     name VARCHAR(50)
 );
 
--- Insert sample data into Hackers table
+
 INSERT INTO Hackers (hacker_id, name) VALUES 
 (15758, 'Rose'),
 (20703, 'Angela'),
@@ -15,7 +15,7 @@ INSERT INTO Hackers (hacker_id, name) VALUES
 (62529, 'Bonnie'),
 (79722, 'Michael');
 
--- Create Submissions table
+
 CREATE TABLE Submissions (
     submission_date DATE,
     submission_id INT PRIMARY KEY,
@@ -24,7 +24,7 @@ CREATE TABLE Submissions (
     FOREIGN KEY (hacker_id) REFERENCES Hackers(hacker_id)
 );
 
--- Insert sample data into Submissions table
+
 INSERT INTO Submissions (submission_date, submission_id, hacker_id, score) VALUES 
 ('2016-03-01', 8494, 20703, 0),
 ('2016-03-01', 22403, 53473, 15),
